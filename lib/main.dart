@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -56,9 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             ElevatedButton(
               onPressed: (){
-
+              _incrementCounter();
               }, 
-              child: Text ('Hello Babe I did this'),
+              style:  ButtonStyle( 
+              overlayColor:  getColor(Color.fromARGB(250, Random().nextInt(255), Random().nextInt(255), Random().nextInt(255)), Color.fromARGB(250, Random().nextInt(255), Random().nextInt(255), Random().nextInt(255))),
+              ),
+              child: const Text ('Hello Babe I did this'),
               ),
             const Text(
               'You have pushed the button this many times:',
@@ -76,5 +81,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+  MaterialStateProperty<Color> getColor(Color start, Color end){
+getColor(Set<MaterialState> states){
+      if(states.contains(MaterialState.pressed)){
+    return end;
+  } else {
+    return start;
+  }
+}
+    return MaterialStateProperty.resolveWith(getColor);
   }
 }
